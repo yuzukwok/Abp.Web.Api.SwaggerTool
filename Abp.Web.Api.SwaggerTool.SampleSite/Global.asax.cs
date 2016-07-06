@@ -9,15 +9,14 @@ using System.Web.Routing;
 
 namespace Abp.Web.Api.SwaggerTool.SampleSite
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiApplication : AbpWebApplication
     {
-        protected void Application_Start()
+        protected override void Application_Start(object sender, EventArgs e)
         {
-            AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
+        
+         
+            base.Application_Start(sender, e);
         }
     }
 }
