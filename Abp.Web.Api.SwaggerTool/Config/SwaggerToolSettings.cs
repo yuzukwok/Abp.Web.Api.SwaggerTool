@@ -14,14 +14,22 @@ namespace Abp.Web.Api.SwaggerTool.Config
             title = "default api";
             CSharpGen = new CSharpGen() { ClassName = "ApiClient", Namespace="ApiServices" };
             TypeScriptGen = new TypeScriptGen() { ClassName = "Client", ModuleName = "ApiSerivces" };
+            PostmanGen = new PostmanGen() { name = "ApiServices" };
         }
 
         public string version { get; set; }
         public string title { get; set; }
         public CSharpGen CSharpGen { get; set; }
         public TypeScriptGen TypeScriptGen { get; set; }
+        public PostmanGen PostmanGen { get; set; }
 
 
+    }
+
+    public class PostmanGen
+    {
+        public string name { get; set; }
+        public string headers { get; set; }
     }
 
     public class CSharpGen

@@ -37,6 +37,7 @@ namespace Abp.Web.Api.SwaggerTool
                     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
                     c.EnableSwaggerProxyGen();
+                    c.EnableSwaggerPostmanJsonGen();
                   
                 })
                 .EnableSwaggerUi(c => {

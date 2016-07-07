@@ -15,37 +15,90 @@ namespace Abp.Web.Api.SwaggerTool.Postman
         {
             var collectionId = PostMan.GetId();
             var apis = service.Operations;
-            var requests = GetPostmanRequests(apis, collectionId);
+            var requests = GetPostmanRequests(apis, collectionId, setting);
             var collection = new PostmanCollection
             {
                 id = collectionId,
-                name = "WebAPI2PostMan",
+                name = setting.PostmanGen.name,
                 description = "",
                 order = requests.Select(x => x.id).ToList(),
-                timestamp = 0,
+                timestamp = DateTime.Now.DateTimeToStamp(),
                 requests = requests
             };
+
+            //按照tag分组
+            //TODO folder
+            List<Postfolder> folders = new List<Postfolder>();
+                var groups = requests.GroupBy(s => s.tagname);
+                foreach (var item in groups)
+                {
+                    Postfolder floder = new Postfolder();
+                    floder.id = PostMan.GetId();
+                if (service.Tags != null)
+                {
+                    floder.name = service.Tags.Where(p => p.Name == item.Key).FirstOrDefault().Description;
+                }
+                else
+                {
+                    floder.name = item.Key;
+                }
+                floder.order = requests.Where(p => p.tagname == item.Key).Select(s => s.id).ToList();
+
+                foreach (var req in requests.Where(p => p.tagname == item.Key).ToList())
+                {
+                    req.folder = floder.id;
+                }
+                folders.Add(floder);
+            }
+            collection.folders = folders;
             return JsonConvert.SerializeObject(collection);
         }
 
 
-        private List<PostmanRequest> GetPostmanRequests(IEnumerable<SwaggerOperationDescription> apis, string collectionId)
+        private List<PostmanRequest> GetPostmanRequests(IEnumerable<SwaggerOperationDescription> apis, string collectionId, SwaggerToolSettings setting)
         {
-            return apis.Select(api => new PostmanRequest
+         
+            List<PostmanRequest> re = new List<PostmanRequest>();
+            foreach (var item in apis)
             {
-                collection = collectionId,
-                id = PostMan.GetId(),
-                name = api.Operation.Summary,               
-               //data = GetPostmanDatas(api),
-                description = "",
-                descriptionFormat = "html",
-                headers = "",
-                method = api.Method.ToString(),
-                pathVariables = new Dictionary<string, string>(),
-                url = api.Path,
-                version = 2,
-                collectionId = collectionId
-            }).ToList();
+                var p = new PostmanRequest
+                {
+                    
+                    id = PostMan.GetId(),
+                    name = item.Operation.Summary,
+                    description = item.Operation.Summary,
+                    descriptionFormat = "html",
+                    headers = setting.PostmanGen.headers,
+                    method = item.Method.ToString(),
+                    pathVariables = new Dictionary<string, string>(),
+                    url = item.Path,
+                    collectionId = collectionId,
+                    tagname = item.Operation.Tags.FirstOrDefault()
+                };
+                var datalist = item.Operation.Parameters
+                    .Where(s => s.Kind == SwaggerParameterKind.Query)
+                    .Select(s => new PostmanData() { key = s.Name })
+                    .ToList();
+
+                if (datalist.Count>0)
+                {
+                    p.data = datalist;
+
+                }
+                var rawdata = item.Operation.Parameters
+                     .Where(s => s.Kind == SwaggerParameterKind.Body)
+                     .SingleOrDefault();
+                if (rawdata!=null)
+                {
+                    //TODO schema4json
+                    p.dataMode = "raw";
+                    //p.rawModeData = rawdata.SchemaReference.ToJson();
+                }
+                
+               
+                re.Add(p);
+            }
+            return re;
         }
 
      

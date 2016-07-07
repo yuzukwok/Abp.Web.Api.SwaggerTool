@@ -48,12 +48,26 @@ namespace Abp.Web.Api.SwaggerTool.Postman
         public string description { get; set; }
         public List<string> order { get; set; }
         public long timestamp { get; set; }
+
+        public List<Postfolder> folders { get; set; }
+        public int owner { get; set; }
+        public string remoteLink { get; set; }
+        public bool @public{get;set;}
         public List<PostmanRequest> requests { get; set; }
+    }
+
+    public class Postfolder
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public IList<string> order { get; set; }
+        public int owner { get; set; }
     }
 
     public class PostmanRequest
     {
-        public string collection { get; set; }
+        
         public string id { get; set; }
         public string name { get; set; }
         public string dataMode { get; set; }
@@ -66,6 +80,10 @@ namespace Abp.Web.Api.SwaggerTool.Postman
         public string url { get; set; }
         public int version { get; set; }
         public string collectionId { get; set; }
+        public string folder { get; set; }
+        public string rawModeData { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
+        public string tagname { get; set; }
     }
 
     public class PostmanData

@@ -30,7 +30,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
             var swaggerProvider = (ISwaggerProvider)_config.GetType().GetMethod("GetSwaggerProvider", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(_config, new object[] { request });
 
             var rootUrl = (string)_config.GetType().GetMethod("GetRootUrl", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(_config, new object[] { request });
-            var type = request.GetRouteData().Values["type"].ToString();
+            //var type = request.GetRouteData().Values["type"].ToString();
 
             try
             {

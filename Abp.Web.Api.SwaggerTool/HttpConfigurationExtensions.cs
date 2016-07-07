@@ -1,4 +1,5 @@
-﻿using Swashbuckle.Application;
+﻿using Abp.Web.Api.SwaggerTool.Postman;
+using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace Abp.Web.Api.SwaggerTool
                  routeTemplate: DefaultRoutePostManTemplate,
                  defaults: null,
                  constraints: null,
-                 handler: new SwaggerProxyHandler(swaggerconfig)
+                 handler: new SwaggerPostmanHandler(swaggerconfig)
              );
 
             return swaggerconfig;
