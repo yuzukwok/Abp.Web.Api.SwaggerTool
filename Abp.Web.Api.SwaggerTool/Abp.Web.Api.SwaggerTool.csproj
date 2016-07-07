@@ -141,10 +141,13 @@
     <Compile Include="CodeGeneration\CSharpGen.cs" />
     <Compile Include="CodeGeneration\GenCode.cs" />
     <Compile Include="CodeGeneration\TypeScriptGen.cs" />
+    <Compile Include="Postman\PostManData.cs" />
+    <Compile Include="Postman\PostManGen.cs" />
     <Compile Include="Config\SwaggerToolSettings.cs" />
     <Compile Include="HttpConfigurationExtensions.cs" />
+    <Compile Include="Postman\SwaggerPostmanHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SwaggerProxyHandler.cs" />
+    <Compile Include="CodeGeneration\SwaggerProxyHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
