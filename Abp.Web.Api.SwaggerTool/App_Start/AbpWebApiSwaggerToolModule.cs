@@ -1,5 +1,6 @@
 ﻿using Abp.Configuration.Startup;
 using Abp.Modules;
+using Abp.Web.Api.SwaggerTool.Config;
 using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
@@ -26,19 +27,17 @@ namespace Abp.Web.Api.SwaggerTool
         }
         private void ConfigureSwaggerUi()
         {
+            var setting = Its.Configuration.Settings.Get<SwaggerToolSettings>();
 
             Configuration.Modules.AbpWebApi().HttpConfiguration
                 .EnableSwagger(c =>
                 {
                     
-                    c.SingleApiVersion("v1", "Werounds.WebApi");
+                    c.SingleApiVersion(setting.version, setting.title);
                     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
                     c.EnableSwaggerProxyGen();
-                    //swagger-ui not support apikey
-                    //c.ApiKey("SessionKey").In("header");
-                    //c.IncludeXmlComments(GetXmlCommentsPath());
-                    //c.DocumentFilter<ApplyDocumentVendorExtensions>();
+                  
                 })
                 .EnableSwaggerUi(c => {
                  
