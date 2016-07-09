@@ -23,7 +23,7 @@ namespace Abp.Web.Api.SwaggerTool.SampleSite.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public void Post([FromBody]ClassDto value)
         {
         }
 
@@ -36,5 +36,15 @@ namespace Abp.Web.Api.SwaggerTool.SampleSite.Controllers
         public void Delete(int id)
         {
         }
+    }
+
+    public class ClassDto
+    {
+        public List<ClassDto2> Dtos { get; set; }
+    }
+    public class ClassDto2
+    {
+        public string A { get; set; }
+        public int B { get; set; }
     }
 }

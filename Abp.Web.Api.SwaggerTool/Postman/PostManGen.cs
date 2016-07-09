@@ -92,7 +92,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                 {
                     //TODO schema4json
                     p.dataMode = "raw";
-                    //p.rawModeData = rawdata.SchemaReference.ToJson();
+                    p.rawModeData =new Schema4Json().ToSampleJson(rawdata.ActualSchema);
                 }
                 
                
