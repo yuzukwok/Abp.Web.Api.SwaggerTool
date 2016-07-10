@@ -43,6 +43,11 @@ namespace Abp.Web.Api.SwaggerTool.Postman
 
     public class PostmanCollection
     {
+        public PostmanCollection()
+        {
+            //不能为空
+            order = new List<string>();
+        }
         public string id { get; set; }
         public string name { get; set; }
         public string description { get; set; }

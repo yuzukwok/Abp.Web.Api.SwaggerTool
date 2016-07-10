@@ -21,13 +21,13 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                 id = collectionId,
                 name = setting.PostmanGen.name,
                 description = "",
-                order = requests.Select(x => x.id).ToList(),
+                //在文件夹出现的order Id不能出现该order中
+               // order = requests.Select(x => x.id).ToList(),
                 timestamp = DateTime.Now.DateTimeToStamp(),
                 requests = requests
             };
 
             //按照tag分组
-            //TODO folder
             List<Postfolder> folders = new List<Postfolder>();
                 var groups = requests.GroupBy(s => s.tagname);
                 foreach (var item in groups)
@@ -93,6 +93,10 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                    
                     p.dataMode = "raw";
                     p.rawModeData =new Schema4Json().ToSampleJson(rawdata.ActualSchema);
+                    if (string.IsNullOrEmpty(p.headers)||(!string.IsNullOrEmpty(p.headers)&&!p.headers.Contains("Content-Type: application/json\n")))
+                    {
+                        p.headers = "Content-Type: application/json\n" + p.headers??"";
+                    }
                 }
                 
                
