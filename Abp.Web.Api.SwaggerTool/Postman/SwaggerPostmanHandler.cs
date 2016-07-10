@@ -38,7 +38,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                 var str = JsonConvert.SerializeObject(swaggerDoc, Formatting.Indented, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, Converters = new[] { new VendorExtensionsConverter() } });
                 var service = SwaggerService.FromJson(str);
 
-                var code = new PostManGen().Gen( service, setting);
+                var code = new PostManGen().Gen( service, rootUrl, setting);
                 // var content = ContentFor(request, swaggerDoc);
                 return TaskFor(new HttpResponseMessage { Content = new StringContent(code) });
             }
@@ -48,13 +48,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
             }
         }
 
-        private HttpContent ContentFor(HttpRequestMessage request, SwaggerDocument swaggerDoc)
-        {
-            var negotiator = request.GetConfiguration().Services.GetContentNegotiator();
-            var result = negotiator.Negotiate(typeof(SwaggerDocument), request, GetSupportedSwaggerFormatters());
-
-            return new ObjectContent(typeof(SwaggerDocument), swaggerDoc, result.Formatter, result.MediaType);
-        }
+  
 
         private IEnumerable<MediaTypeFormatter> GetSupportedSwaggerFormatters()
         {

@@ -11,11 +11,11 @@ namespace Abp.Web.Api.SwaggerTool.Postman
 {
   public  class PostManGen
     {
-        public string Gen(SwaggerService service,SwaggerToolSettings setting)
+        public string Gen(SwaggerService service,string root,SwaggerToolSettings setting)
         {
             var collectionId = PostMan.GetId();
             var apis = service.Operations;
-            var requests = GetPostmanRequests(apis, collectionId, setting);
+            var requests = GetPostmanRequests(apis, collectionId, root,setting);
             var collection = new PostmanCollection
             {
                 id = collectionId,
@@ -55,7 +55,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
         }
 
 
-        private List<PostmanRequest> GetPostmanRequests(IEnumerable<SwaggerOperationDescription> apis, string collectionId, SwaggerToolSettings setting)
+        private List<PostmanRequest> GetPostmanRequests(IEnumerable<SwaggerOperationDescription> apis, string collectionId, string root,SwaggerToolSettings setting)
         {
          
             List<PostmanRequest> re = new List<PostmanRequest>();
@@ -71,7 +71,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                     headers = setting.PostmanGen.headers,
                     method = item.Method.ToString(),
                     pathVariables = new Dictionary<string, string>(),
-                    url = item.Path,
+                    url =root+ item.Path,
                     collectionId = collectionId,
                     tagname = item.Operation.Tags.FirstOrDefault()
                 };
@@ -90,7 +90,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                      .SingleOrDefault();
                 if (rawdata!=null)
                 {
-                    //TODO schema4json
+                   
                     p.dataMode = "raw";
                     p.rawModeData =new Schema4Json().ToSampleJson(rawdata.ActualSchema);
                 }

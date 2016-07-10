@@ -12,14 +12,14 @@ namespace Abp.Web.Api.SwaggerTool
         public string ToSampleJson(JsonSchema4 jsonschemas)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("{");
+            builder.Append("{\r\n");
             IList<string> json = new List<string>();
             foreach (var item in jsonschemas.Properties)
             {
                 json.Add(GenJsonProperties(item.Value));
             }
-            builder.Append(string.Join("," , json));
-            builder.Append("}");
+            builder.Append(string.Join(",\r\n" , json));
+            builder.Append("}\r\n");
 
             return builder.ToString();
         }
