@@ -35,6 +35,14 @@ namespace Abp.Web.Api.SwaggerTool
                     
                     c.SingleApiVersion(setting.version, setting.title);
                     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                    var files = GetXmlCommentsPath();
+                    foreach (var item in files)
+                    {
+                        c.IncludeXmlComments(item);
+                    }
+                  
+                    c.DocumentFilter<ApplyDocumentVendorExtensions>();
+
 
                     c.EnableSwaggerProxyGen();
                     c.EnableSwaggerPostmanJsonGen();
@@ -45,9 +53,10 @@ namespace Abp.Web.Api.SwaggerTool
                 });
         }
 
-        private static string GetXmlCommentsPath()
+        private static string[] GetXmlCommentsPath()
         {
-            return System.String.Format(@"{0}\bin\WeRounds.Core.XML", System.AppDomain.CurrentDomain.BaseDirectory);
+          return  System.IO.Directory.GetFiles(System.AppDomain.CurrentDomain.BaseDirectory, "*.XML");
+           
         }
     }
 }

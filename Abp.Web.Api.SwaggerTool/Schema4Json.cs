@@ -39,7 +39,7 @@ namespace Abp.Web.Api.SwaggerTool
             {
                 re += "[" + GenJsonArrayProp(prop.Item) + "]";
             }
-            return re;
+            return re+"\r\n";
         }
 
         private string GenJsonArrayProp(JsonSchema4 schema)

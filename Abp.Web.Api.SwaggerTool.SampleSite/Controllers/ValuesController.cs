@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -42,9 +44,23 @@ namespace Abp.Web.Api.SwaggerTool.SampleSite.Controllers
     {
         public List<ClassDto2> Dtos { get; set; }
     }
+    /// <summary>
+    /// dto class 2 comment
+    /// </summary>
     public class ClassDto2
     {
+        /// <summary>
+        /// A comment
+        /// </summary>
         public string A { get; set; }
         public int B { get; set; }
+        public Enum1 Enum { get; set; }
+    }
+
+    public enum Enum1
+    {
+        [Display(Name ="这是C")]
+        C,
+        D
     }
 }
