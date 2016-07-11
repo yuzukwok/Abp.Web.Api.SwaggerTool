@@ -5,6 +5,7 @@ using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,12 @@ namespace Abp.Web.Api.SwaggerTool
 
         public override void PreInitialize()
         {
-            ConfigureSwaggerUi();
+            var setting = Its.Configuration.Settings.Get<SwaggerToolSettings>();
+            if (setting.enable)
+            {
+                ConfigureSwaggerUi();
+            }
+           
             base.PreInitialize();
         }
         public override void Initialize()
@@ -35,12 +41,15 @@ namespace Abp.Web.Api.SwaggerTool
                     
                     c.SingleApiVersion(setting.version, setting.title);
                     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-                    var files = GetXmlCommentsPath();
-                    foreach (var item in files)
+                    if (setting.XmlCommentFiles != null)
                     {
-                        c.IncludeXmlComments(item);
+                        foreach (var item in setting.XmlCommentFiles)
+                        {
+                            c.IncludeXmlComments(System.AppDomain.CurrentDomain.BaseDirectory+"//"+item);
+                        }
                     }
-                  
+
+
                     c.DocumentFilter<ApplyDocumentVendorExtensions>();
 
 
@@ -49,9 +58,19 @@ namespace Abp.Web.Api.SwaggerTool
                   
                 })
                 .EnableSwaggerUi(c => {
-                 
+                    if (setting.CustomAssets!=null)
+                    {
+                        foreach (var item in setting.CustomAssets)
+                        {
+                            c.CustomAsset(item.name, Assembly.Load(item.assambly), item.resourcename);
+                        }
+                    }
+                    
+                    
                 });
         }
+
+       
 
         private static string[] GetXmlCommentsPath()
         {

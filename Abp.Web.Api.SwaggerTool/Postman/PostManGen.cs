@@ -36,7 +36,16 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                     floder.id = PostMan.GetId();
                 if (service.Tags != null)
                 {
-                    floder.name = service.Tags.Where(p => p.Name == item.Key).FirstOrDefault().Description;
+                    var desc = service.Tags.Where(p => p.Name == item.Key).FirstOrDefault();
+                    if (desc!=null)
+                    {
+                        floder.name = desc.Description;
+                    }
+                    else
+                    {
+                        floder.name = item.Key;
+                    }
+                   
                 }
                 else
                 {

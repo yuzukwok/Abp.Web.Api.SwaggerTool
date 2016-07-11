@@ -10,6 +10,7 @@ namespace Abp.Web.Api.SwaggerTool.Config
     {
         public SwaggerToolSettings()
         {
+            enable = true;
             version = "v1";
             title = "default api";
             CSharpGen = new CSharpGen() { ClassName = "ApiClient", Namespace="ApiServices" };
@@ -17,15 +18,26 @@ namespace Abp.Web.Api.SwaggerTool.Config
             PostmanGen = new PostmanGen() { name = "ApiServices" };
         }
 
+        public bool enable { get; set; }
         public string version { get; set; }
         public string title { get; set; }
         public CSharpGen CSharpGen { get; set; }
         public TypeScriptGen TypeScriptGen { get; set; }
         public PostmanGen PostmanGen { get; set; }
 
+        public IList<CustomAsset> CustomAssets { get; set; }
 
+        public string[] XmlCommentFiles { get; set; }
     }
 
+    
+
+    public class CustomAsset
+    {
+        public string name { get; set; }
+        public string assambly { get; set; }
+        public string resourcename { get; set; }
+    }
     public class PostmanGen
     {
         public string name { get; set; }
