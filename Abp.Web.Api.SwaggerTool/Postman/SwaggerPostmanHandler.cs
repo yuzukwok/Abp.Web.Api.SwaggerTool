@@ -39,8 +39,9 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                 var service = SwaggerService.FromJson(str);
 
                 var code = new PostManGen().Gen( service, rootUrl, setting);
-                // var content = ContentFor(request, swaggerDoc);
-                return TaskFor(new HttpResponseMessage { Content = new StringContent(code) });
+                var req = new HttpResponseMessage { Content = new StringContent(code) };
+                req.Content.Headers.Add("Content-Disposition", "attachment;filename=swagger2postman.json");
+                return TaskFor(req);
             }
             catch (UnknownApiVersion ex)
             {

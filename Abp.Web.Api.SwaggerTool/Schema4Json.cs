@@ -12,14 +12,18 @@ namespace Abp.Web.Api.SwaggerTool
         public string ToSampleJson(JsonSchema4 jsonschemas)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("{\r\n");
+            builder.Append("{");
             IList<string> json = new List<string>();
             foreach (var item in jsonschemas.Properties)
             {
-                json.Add(GenJsonProperties(item.Value));
+                if (!item.Value.IsReadOnly)//readonly is not needed
+                {
+                    json.Add(GenJsonProperties(item.Value));
+                }
+                
             }
-            builder.Append(string.Join(",\r\n" , json));
-            builder.Append("}\r\n");
+            builder.Append(string.Join("," , json));
+            builder.Append("}");
 
             return builder.ToString();
         }
@@ -39,7 +43,19 @@ namespace Abp.Web.Api.SwaggerTool
             {
                 re += "[" + GenJsonArrayProp(prop.Item) + "]";
             }
-            return re+"\r\n";
+            else if (prop.Type == JsonObjectType.Boolean)
+            {
+                re += "true";
+            }
+            else if (prop.Type == JsonObjectType.None)
+            {
+                re += ToSampleJson(prop.ActualSchema);
+            }
+            else
+            {
+                re += "null";
+            }
+            return re;
         }
 
         private string GenJsonArrayProp(JsonSchema4 schema)

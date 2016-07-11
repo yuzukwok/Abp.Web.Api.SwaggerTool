@@ -78,7 +78,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                     description = item.Operation.Summary,
                     descriptionFormat = "html",
                     headers = setting.PostmanGen.headers,
-                    method = item.Method.ToString(),
+                    method = item.Method.ToString().ToUpper(),
                     pathVariables = new Dictionary<string, string>(),
                     url =root+ item.Path,
                     collectionId = collectionId,
@@ -86,12 +86,14 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                 };
                 var datalist = item.Operation.Parameters
                     .Where(s => s.Kind == SwaggerParameterKind.Query)
-                    .Select(s => new PostmanData() { key = s.Name })
+                    .Select(s =>s.Name+"={{"+s.Name+"}}")
                     .ToList();
 
                 if (datalist.Count>0)
                 {
-                    p.data = datalist;
+                    p.dataMode = "params";
+                    //URL Query
+                    p.url +="/?"+string.Join("&",datalist);
 
                 }
                 var rawdata = item.Operation.Parameters
@@ -102,6 +104,9 @@ namespace Abp.Web.Api.SwaggerTool.Postman
                    
                     p.dataMode = "raw";
                     p.rawModeData =new Schema4Json().ToSampleJson(rawdata.ActualSchema);
+                    //美化
+                    p.rawModeData = JsonConvert.SerializeObject(JsonConvert.DeserializeObject(p.rawModeData),Formatting.Indented);
+
                     if (string.IsNullOrEmpty(p.headers)||(!string.IsNullOrEmpty(p.headers)&&!p.headers.Contains("Content-Type: application/json\n")))
                     {
                         p.headers = "Content-Type: application/json\n" + p.headers??"";
