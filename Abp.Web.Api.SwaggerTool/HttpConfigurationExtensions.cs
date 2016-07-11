@@ -13,6 +13,8 @@ namespace Abp.Web.Api.SwaggerTool
     {
         private static readonly string DefaultRouteTemplate = "swagger/proxy/{type}";
         private static readonly string DefaultRoutePostManTemplate = "swagger/postman";
+        private static readonly string DefaultRouteSearchTemplate = "swagger/docs/{apiVersion}/{q}";
+       
         public static SwaggerDocsConfig EnableSwaggerProxyGen(this SwaggerDocsConfig swaggerconfig
             )
         {
@@ -27,7 +29,20 @@ namespace Abp.Web.Api.SwaggerTool
 
             return swaggerconfig;
         }
+        public static SwaggerDocsConfig EnableSwaggerSearch(this SwaggerDocsConfig swaggerconfig
+            )
+        {
 
+            GlobalConfiguration.Configuration.Routes.MapHttpRoute(
+                 name: "swagger_search",
+                 routeTemplate: DefaultRouteSearchTemplate,
+                  defaults: null,
+                constraints: new { apiVersion = @".+",q=".+" },
+                 handler: new SwaggerSearchHandler(swaggerconfig)
+             );
+
+            return swaggerconfig;
+        }
 
 
         public static SwaggerDocsConfig EnableSwaggerPostmanJsonGen(this SwaggerDocsConfig swaggerconfig

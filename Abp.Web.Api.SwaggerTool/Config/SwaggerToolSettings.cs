@@ -42,7 +42,7 @@ namespace Abp.Web.Api.SwaggerTool.Config
     {
         public string name { get; set; }
         public string headers { get; set; }
-        public bool AbpApiFloder { get; set; }
+        //public bool AbpApiFloder { get; set; }
     }
 
     public class CSharpGen

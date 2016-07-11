@@ -52,9 +52,10 @@ namespace Abp.Web.Api.SwaggerTool
 
                     c.DocumentFilter<ApplyDocumentVendorExtensions>();
 
-
+                    //userful!!!
                     c.EnableSwaggerProxyGen();
                     c.EnableSwaggerPostmanJsonGen();
+                    c.EnableSwaggerSearch();
                   
                 })
                 .EnableSwaggerUi(c => {
