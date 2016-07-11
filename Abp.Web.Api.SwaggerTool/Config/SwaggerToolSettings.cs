@@ -13,6 +13,7 @@ namespace Abp.Web.Api.SwaggerTool.Config
             enable = true;
             version = "v1";
             title = "default api";
+            theme = "flattop";
             CSharpGen = new CSharpGen() { ClassName = "ApiClient", Namespace="ApiServices" };
             TypeScriptGen = new TypeScriptGen() { ClassName = "Client", ModuleName = "ApiSerivces" };
             PostmanGen = new PostmanGen() { name = "ApiServices" };
@@ -21,6 +22,7 @@ namespace Abp.Web.Api.SwaggerTool.Config
         public bool enable { get; set; }
         public string version { get; set; }
         public string title { get; set; }
+        public string theme { get; set; }
         public CSharpGen CSharpGen { get; set; }
         public TypeScriptGen TypeScriptGen { get; set; }
         public PostmanGen PostmanGen { get; set; }

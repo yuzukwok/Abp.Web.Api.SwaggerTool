@@ -157,6 +157,15 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Theme\theme-feeling-blue.css" />
+    <EmbeddedResource Include="Theme\theme-flattop.css" />
+    <EmbeddedResource Include="Theme\theme-monokai.css" />
+    <EmbeddedResource Include="Theme\theme-muted.css" />
+    <EmbeddedResource Include="Theme\theme-newspaper.css" />
+    <EmbeddedResource Include="Theme\theme-outline.css" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

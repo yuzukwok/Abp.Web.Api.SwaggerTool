@@ -59,6 +59,12 @@ namespace Abp.Web.Api.SwaggerTool
                   
                 })
                 .EnableSwaggerUi(c => {
+
+                    //theme
+                    if (!string.IsNullOrEmpty(setting.theme))
+                    {
+                        c.InjectStylesheet(typeof(AbpWebApiSwaggerToolModule).Assembly, "Abp.Web.Api.SwaggerTool.Theme.theme-"+setting.theme+".css");
+                    }
                     if (setting.CustomAssets!=null)
                     {
                         foreach (var item in setting.CustomAssets)
