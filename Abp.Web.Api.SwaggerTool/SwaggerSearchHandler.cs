@@ -40,7 +40,7 @@ namespace Abp.Web.Api.SwaggerTool
                 IList<string> keytoremove = new List<string>();
                 foreach (var item in swaggerDoc.paths)
                 {
-                    if (!item.Key.Contains(q))
+                    if (!item.Key.ToUpper().Contains(q.ToUpper()))
                     {
                         keytoremove.Add(item.Key);
                     }

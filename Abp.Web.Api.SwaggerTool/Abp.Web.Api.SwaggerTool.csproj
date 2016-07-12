@@ -82,21 +82,21 @@
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NJsonSchema, Version=2.52.6030.13790, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
-      <HintPath>..\packages\NJsonSchema.2.52.6030.13790\lib\portable45-net45+win8+wp8+wpa81\NJsonSchema.dll</HintPath>
+    <Reference Include="NJsonSchema, Version=2.56.6036.39820, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\packages\NJsonSchema.2.56.6036.39820\lib\portable45-net45+win8+wp8+wpa81\NJsonSchema.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NJsonSchema.CodeGeneration, Version=2.52.6030.13791, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NJsonSchema.CodeGeneration.2.52.6030.13791\lib\portable45-net45+win8+wp8+wpa81\NJsonSchema.CodeGeneration.dll</HintPath>
+    <Reference Include="NJsonSchema.CodeGeneration, Version=2.56.6036.39821, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\packages\NJsonSchema.CodeGeneration.2.56.6036.39821\lib\portable45-net45+win8+wp8+wpa81\NJsonSchema.CodeGeneration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NSwag.CodeGeneration, Version=3.18.6032.3334, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NSwag.CodeGeneration.3.18.6030.16324\lib\portable45-net45+win8+wp8+wpa81\NSwag.CodeGeneration.dll</HintPath>
+    <Reference Include="NSwag.CodeGeneration, Version=3.22.6037.14594, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSwag.CodeGeneration.3.22.6037.14594\lib\portable45-net45+win8+wp8+wpa81\NSwag.CodeGeneration.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NSwag.Core, Version=3.18.6032.3333, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NSwag.Core.3.18.6030.16324\lib\portable45-net45+win8+wp8+wpa81\NSwag.Core.dll</HintPath>
+    <Reference Include="NSwag.Core, Version=3.22.6037.14594, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSwag.Core.3.22.6037.14594\lib\portable45-net45+win8+wp8+wpa81\NSwag.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.3.2\lib\net40\Swashbuckle.Core.dll</HintPath>
@@ -114,6 +114,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
@@ -143,6 +144,66 @@
     <Compile Include="CodeGeneration\GenCode.cs" />
     <Compile Include="CodeGeneration\TypeScriptGen.cs" />
     <Compile Include="DateTimeExtensions.cs" />
+    <Compile Include="Difftaculous\Adapters\AbstractAdapter.cs" />
+    <Compile Include="Difftaculous\Adapters\JsonAdapter.cs" />
+    <Compile Include="Difftaculous\Adapters\ObjectAdapter.cs" />
+    <Compile Include="Difftaculous\Adapters\XmlAdapter.cs" />
+    <Compile Include="Difftaculous\ArrayDiff\DiffArraySubsequencer.cs" />
+    <Compile Include="Difftaculous\ArrayDiff\ElementGroup.cs" />
+    <Compile Include="Difftaculous\ArrayDiff\ElementGroupPostProcessor.cs" />
+    <Compile Include="Difftaculous\ArrayDiff\IArraySubsequencer.cs" />
+    <Compile Include="Difftaculous\ArrayDiff\IndexedArraySubsequencer.cs" />
+    <Compile Include="Difftaculous\ArrayDiff\KeyedArraySubsequencer.cs" />
+    <Compile Include="Difftaculous\Caveats\ICaveat.cs" />
+    <Compile Include="Difftaculous\Caveats\VarianceCaveat.cs" />
+    <Compile Include="Difftaculous\DiffEngine.cs" />
+    <Compile Include="Difftaculous\DiffSettings.cs" />
+    <Compile Include="Difftaculous\Hints\ArrayDiffHint.cs" />
+    <Compile Include="Difftaculous\Hints\IHint.cs" />
+    <Compile Include="Difftaculous\Misc\Extensions.cs" />
+    <Compile Include="Difftaculous\Paths\ArrayIndexFilter.cs" />
+    <Compile Include="Difftaculous\Paths\ArrayMultipleIndexFilter.cs" />
+    <Compile Include="Difftaculous\Paths\ArraySliceFilter.cs" />
+    <Compile Include="Difftaculous\Paths\DiffPath.cs" />
+    <Compile Include="Difftaculous\Paths\Expressions\BooleanQueryExpression.cs" />
+    <Compile Include="Difftaculous\Paths\Expressions\CompositeExpression.cs" />
+    <Compile Include="Difftaculous\Paths\Expressions\QueryExpression.cs" />
+    <Compile Include="Difftaculous\Paths\FieldFilter.cs" />
+    <Compile Include="Difftaculous\Paths\FieldMultipleFilter.cs" />
+    <Compile Include="Difftaculous\Paths\JsonPathParser.cs" />
+    <Compile Include="Difftaculous\Paths\PathException.cs" />
+    <Compile Include="Difftaculous\Paths\PathFilter.cs" />
+    <Compile Include="Difftaculous\Paths\QueryFilter.cs" />
+    <Compile Include="Difftaculous\Paths\ScanFilter.cs" />
+    <Compile Include="Difftaculous\Results\AbstractDiffAnnotation.cs" />
+    <Compile Include="Difftaculous\Results\ArrayItemsDeletedAnnotation.cs" />
+    <Compile Include="Difftaculous\Results\ArrayItemsInsertedAnnotation.cs" />
+    <Compile Include="Difftaculous\Results\ArrayItemsReplacedAnnotation.cs" />
+    <Compile Include="Difftaculous\Results\DifferingValuesAnnotation.cs" />
+    <Compile Include="Difftaculous\Results\DiffResult.cs" />
+    <Compile Include="Difftaculous\Results\IDiffResult.cs" />
+    <Compile Include="Difftaculous\Results\InconsistentTypesAnnotation.cs" />
+    <Compile Include="Difftaculous\Results\MissingKeyAnnotation.cs" />
+    <Compile Include="Difftaculous\Results\MissingPropertyAnnotation.cs" />
+    <Compile Include="Difftaculous\ZModel\CollectionUtils.cs" />
+    <Compile Include="Difftaculous\ZModel\ConvertUtils.cs" />
+    <Compile Include="Difftaculous\ZModel\Extensions.cs" />
+    <Compile Include="Difftaculous\ZModel\MathUtils.cs" />
+    <Compile Include="Difftaculous\ZModel\MiscellaneousUtils.cs" />
+    <Compile Include="Difftaculous\ZModel\ReflectionUtils.cs" />
+    <Compile Include="Difftaculous\ZModel\TokenType.cs" />
+    <Compile Include="Difftaculous\ZModel\TypeExtensions.cs" />
+    <Compile Include="Difftaculous\ZModel\ValidationUtils.cs" />
+    <Compile Include="Difftaculous\ZModel\WriteExtensions.cs" />
+    <Compile Include="Difftaculous\ZModel\ZArray.cs" />
+    <Compile Include="Difftaculous\ZModel\ZContainer.cs" />
+    <Compile Include="Difftaculous\ZModel\ZEnumerable.cs" />
+    <Compile Include="Difftaculous\ZModel\ZException.cs" />
+    <Compile Include="Difftaculous\ZModel\ZObject.cs" />
+    <Compile Include="Difftaculous\ZModel\ZProperty.cs" />
+    <Compile Include="Difftaculous\ZModel\ZPropertyKeyedCollection.cs" />
+    <Compile Include="Difftaculous\ZModel\ZToken.cs" />
+    <Compile Include="Difftaculous\ZModel\ZValue.cs" />
     <Compile Include="Postman\PostManData.cs" />
     <Compile Include="Postman\PostManGen.cs" />
     <Compile Include="Config\SwaggerToolSettings.cs" />
@@ -157,7 +218,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Theme\theme-feeling-blue.css" />
     <EmbeddedResource Include="Theme\theme-flattop.css" />
@@ -166,6 +226,7 @@
     <EmbeddedResource Include="Theme\theme-newspaper.css" />
     <EmbeddedResource Include="Theme\theme-outline.css" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
