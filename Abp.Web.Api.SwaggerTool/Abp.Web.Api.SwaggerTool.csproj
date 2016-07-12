@@ -212,7 +212,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeGeneration\SwaggerProxyHandler.cs" />
     <Compile Include="Schema4Json.cs" />
-    <Compile Include="SwaggerSearchHandler.cs" />
+    <Compile Include="SwaggerChangeLogHandler.cs" />
+    <Compile Include="SwaggerDiff.cs" />
+    <Compile Include="SwaggerManger\ISwaggerStore.cs" />
+    <Compile Include="SwaggerManger\TextSwaggerStore.cs" />
+    <Compile Include="Search\SwaggerSearchHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -226,7 +230,9 @@
     <EmbeddedResource Include="Theme\theme-newspaper.css" />
     <EmbeddedResource Include="Theme\theme-outline.css" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ChangeLog\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

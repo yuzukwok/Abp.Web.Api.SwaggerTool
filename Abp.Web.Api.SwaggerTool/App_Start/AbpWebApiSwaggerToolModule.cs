@@ -1,6 +1,8 @@
 ﻿using Abp.Configuration.Startup;
 using Abp.Modules;
 using Abp.Web.Api.SwaggerTool.Config;
+using Abp.Web.Api.SwaggerTool.SwaggerManager;
+using Abp.Web.Api.SwaggerTool.SwaggerManger;
 using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
@@ -26,7 +28,11 @@ namespace Abp.Web.Api.SwaggerTool
         }
         public override void Initialize()
         {
-            
+            if (!IocManager.IsRegistered<ISwaggerStore>())
+            {
+                IocManager.Register<ISwaggerStore, TextSwaggerStore>();
+            }
+          
 
             base.Initialize();
 
@@ -53,6 +59,7 @@ namespace Abp.Web.Api.SwaggerTool
                     c.DocumentFilter<ApplyDocumentVendorExtensions>();
 
                     //userful!!!
+                    c.EnableSwaggerChangeLog();
                     c.EnableSwaggerProxyGen();
                     c.EnableSwaggerPostmanJsonGen();
                     c.EnableSwaggerSearch();
@@ -65,6 +72,7 @@ namespace Abp.Web.Api.SwaggerTool
                     {
                         c.InjectStylesheet(typeof(AbpWebApiSwaggerToolModule).Assembly, "Abp.Web.Api.SwaggerTool.Theme.theme-"+setting.theme+".css");
                     }
+                    //customassert
                     if (setting.CustomAssets!=null)
                     {
                         foreach (var item in setting.CustomAssets)

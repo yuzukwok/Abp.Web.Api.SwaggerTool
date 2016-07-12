@@ -14,7 +14,8 @@ namespace Abp.Web.Api.SwaggerTool
         private static readonly string DefaultRouteTemplate = "swagger/proxy/{type}";
         private static readonly string DefaultRoutePostManTemplate = "swagger/postman";
         private static readonly string DefaultRouteSearchTemplate = "swagger/docs/{apiVersion}/{q}";
-       
+        private static readonly string DefaultRouteChangeLogTemplate = "swagger/changelogs/{apiVersion}";
+
         public static SwaggerDocsConfig EnableSwaggerProxyGen(this SwaggerDocsConfig swaggerconfig
             )
         {
@@ -45,6 +46,22 @@ namespace Abp.Web.Api.SwaggerTool
         }
 
 
+        public static SwaggerDocsConfig EnableSwaggerChangeLog(this SwaggerDocsConfig swaggerconfig
+          )
+        {
+
+            GlobalConfiguration.Configuration.Routes.MapHttpRoute(
+                 name: "swagger_changelog",
+                 routeTemplate: DefaultRouteChangeLogTemplate,
+                  defaults: null,
+                constraints: new { apiVersion = @".+" },
+                 handler: new SwaggerChangeLogHandler(swaggerconfig)
+             );
+
+            return swaggerconfig;
+        }
+
+
         public static SwaggerDocsConfig EnableSwaggerPostmanJsonGen(this SwaggerDocsConfig swaggerconfig
             )
         {
@@ -59,5 +76,7 @@ namespace Abp.Web.Api.SwaggerTool
 
             return swaggerconfig;
         }
+
+
     }
 }
