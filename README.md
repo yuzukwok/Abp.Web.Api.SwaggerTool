@@ -16,9 +16,13 @@
 
 3 can search in the swagger-ui   
 
-/swagger/docs/{apiVersion}/{key to search by path}
+/swagger/docs/{apiVersion}/{key to search by path}  
 
-4 six swagger-ui theme (https://github.com/ostranme/swagger-ui-themes)  
+4 automatic api changelogs and backwards compatible status   
+
+/sawgger/changelogs/{apiVersion}
+
+5 six swagger-ui theme (https://github.com/ostranme/swagger-ui-themes)  
 
 ## Themes
 
@@ -40,4 +44,4 @@
 #### feeling-blue
 ![Feeling Blue Screenshot](https://github.com/ostranme/swagger-ui-themes/blob/master/screenshots/feeling-blue.png)
 
-5 automatic api changelogs and backwards compatible status   
+
