@@ -233,6 +233,25 @@
   <ItemGroup>
     <Folder Include="ChangeLog\" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="lang\zh-CN.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="lang\translator.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="lang\en.js" />
+    <EmbeddedResource Include="lang\es.js" />
+    <EmbeddedResource Include="lang\fr.js" />
+    <EmbeddedResource Include="lang\geo.js" />
+    <EmbeddedResource Include="lang\it.js" />
+    <EmbeddedResource Include="lang\ja.js" />
+    <EmbeddedResource Include="lang\ko-kr.js" />
+    <EmbeddedResource Include="lang\pl.js" />
+    <EmbeddedResource Include="lang\pt.js" />
+    <EmbeddedResource Include="lang\ru.js" />
+    <EmbeddedResource Include="lang\tr.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

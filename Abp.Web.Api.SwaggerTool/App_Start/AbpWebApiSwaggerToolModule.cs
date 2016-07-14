@@ -6,10 +6,12 @@ using Abp.Web.Api.SwaggerTool.SwaggerManger;
 using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Abp.Web.Api.SwaggerTool
 {
@@ -54,6 +56,15 @@ namespace Abp.Web.Api.SwaggerTool
                             c.IncludeXmlComments(System.AppDomain.CurrentDomain.BaseDirectory+"//"+item);
                         }
                     }
+                    else
+                    {
+                        //auto load xml
+                        foreach (var item in GetXmlCommentsPathDefault())
+                        {
+                            c.IncludeXmlComments(item);
+                        }
+                       
+                    }
 
 
                     c.DocumentFilter<ApplyDocumentVendorExtensions>();
@@ -66,6 +77,11 @@ namespace Abp.Web.Api.SwaggerTool
                   
                 })
                 .EnableSwaggerUi(c => {
+
+                    //lang file
+                     c.InjectJavaScript(typeof(AbpWebApiSwaggerToolModule).Assembly, "Abp.Web.Api.SwaggerTool.lang.translator.js");
+                    c.InjectJavaScript(typeof(AbpWebApiSwaggerToolModule).Assembly, "Abp.Web.Api.SwaggerTool.lang.zh-CN.js");
+
 
                     //theme
                     if (!string.IsNullOrEmpty(setting.theme))
@@ -87,10 +103,17 @@ namespace Abp.Web.Api.SwaggerTool
 
        
 
-        private static string[] GetXmlCommentsPath()
+        private static string[] GetXmlCommentsPathDefault()
         {
-          return  System.IO.Directory.GetFiles(System.AppDomain.CurrentDomain.BaseDirectory, "*.XML");
-           
+            return System.AppDomain.CurrentDomain.GetAssemblies()
+                .Where(p=>!p.IsDynamic)
+                 .Select(p => new FileInfo(p.Location))
+                  .Where(p => !p.Name.StartsWith("System") && !p.Name.StartsWith("mscorlib") && !p.Name.StartsWith("Microsoft"))
+                  .Select(p => new FileInfo(HttpRuntime.AppDomainAppPath + "bin\\" + p.Name.Replace(p.Extension, "") + ".xml"))
+                  .Where(p => p.Exists)
+                  .Select(p=>p.FullName)
+                  .ToArray();
+
         }
     }
 }
