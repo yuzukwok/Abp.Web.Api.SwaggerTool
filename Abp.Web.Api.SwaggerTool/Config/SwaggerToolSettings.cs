@@ -14,6 +14,7 @@ namespace Abp.Web.Api.SwaggerTool.Config
             version = "v1";
             title = "default api";
             theme = "flattop";
+            AutoLoadXmlCommentFiles = false;
             CSharpGen = new CSharpGen() { ClassName = "ApiClient", Namespace="ApiServices" };
             TypeScriptGen = new TypeScriptGen() { ClassName = "Client", ModuleName = "ApiSerivces" };
             PostmanGen = new PostmanGen() { name = "ApiServices" };
@@ -26,9 +27,8 @@ namespace Abp.Web.Api.SwaggerTool.Config
         public CSharpGen CSharpGen { get; set; }
         public TypeScriptGen TypeScriptGen { get; set; }
         public PostmanGen PostmanGen { get; set; }
-
         public IList<CustomAsset> CustomAssets { get; set; }
-
+        public bool AutoLoadXmlCommentFiles { get; set; }
         public string[] XmlCommentFiles { get; set; }
     }
 

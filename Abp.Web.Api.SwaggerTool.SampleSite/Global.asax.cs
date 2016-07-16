@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Abp.Web;
+using Abp.Web.Api.SwaggerTool.SampleSite.App_Start;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Web.Routing;
 
 namespace Abp.Web.Api.SwaggerTool.SampleSite
 {
-    public class WebApiApplication : AbpWebApplication
+    public class WebApiApplication : AbpWebApplication<AbpWebApiSwaggerToolSampleModule>
     {
         protected override void Application_Start(object sender, EventArgs e)
         {
