@@ -52,3 +52,8 @@ window.SwaggerTranslator.learn({
     "from path":"à partir du chemin",
     "server returned":"réponse du serveur"
 });
+
+
+$(function () {
+    window.SwaggerTranslator.translate();
+});

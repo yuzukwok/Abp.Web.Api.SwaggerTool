@@ -51,3 +51,8 @@ window.SwaggerTranslator.learn({
     "from path":"yoldan",
     "server returned":"sunucuya dönüldü"
 });
+
+
+$(function () {
+    window.SwaggerTranslator.translate();
+});

@@ -50,3 +50,8 @@ window.SwaggerTranslator.learn({
     "from path":"da cartella",
     "server returned":"il server ha restituito"
 });
+
+
+$(function () {
+    window.SwaggerTranslator.translate();
+});

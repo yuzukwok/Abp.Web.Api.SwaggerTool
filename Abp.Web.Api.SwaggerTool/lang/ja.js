@@ -51,3 +51,8 @@ window.SwaggerTranslator.learn({
     "from path":"次のパスから",
     "server returned":"サーバからの返答"
 });
+
+
+$(function () {
+    window.SwaggerTranslator.translate();
+});

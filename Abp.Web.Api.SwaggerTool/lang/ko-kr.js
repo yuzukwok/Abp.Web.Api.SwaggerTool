@@ -51,3 +51,8 @@ window.SwaggerTranslator.learn({
     "from path":"다음 경로로 부터",
     "server returned":"서버 응답함."
 });
+
+
+$(function () {
+    window.SwaggerTranslator.translate();
+});

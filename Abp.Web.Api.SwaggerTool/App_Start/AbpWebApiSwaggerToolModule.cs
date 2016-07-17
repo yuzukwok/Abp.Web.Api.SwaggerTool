@@ -4,6 +4,7 @@ using Abp.Web.Api.SwaggerTool.Config;
 using Abp.Web.Api.SwaggerTool.Logging;
 using Abp.Web.Api.SwaggerTool.SwaggerManager;
 using Abp.Web.Api.SwaggerTool.SwaggerManger;
+using Abp.WebApi;
 using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
 namespace Abp.Web.Api.SwaggerTool
 {
+    [DependsOn(typeof(AbpWebApiModule))]
    public class AbpWebApiSwaggerToolModule:AbpModule
     {
         private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
@@ -57,17 +60,22 @@ namespace Abp.Web.Api.SwaggerTool
                     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                     if (setting.XmlCommentFiles != null)
                     {
+                        Logger.Info("using xmlcommentfiles");
                         foreach (var item in setting.XmlCommentFiles)
                         {
-                            c.IncludeXmlComments(HttpRuntime.AppDomainAppPath + "bin\\"+item);
+                            var file = HttpRuntime.AppDomainAppPath + "bin\\" + item;
+                            c.IncludeXmlComments(file);
+                            Logger.Info("using xmlcommentfile:"+file);
                         }
                     }
                     else if(setting.AutoLoadXmlCommentFiles==true)
                     {
+                        Logger.Info("auto load xmlcommentfiles");
                         //auto load xml
                         foreach (var item in GetXmlCommentsPathDefault())
                         {
                             c.IncludeXmlComments(item);
+                            Logger.Info("using xmlcommentfile:" + item);
                         }
 
                     }
@@ -75,31 +83,42 @@ namespace Abp.Web.Api.SwaggerTool
 
                     c.DocumentFilter<ApplyDocumentVendorExtensions>();
 
+
+                    c.CustomProvider((defaultProvider) => new CachingSwaggerProvider(defaultProvider));
+
                     //userful!!!
                     c.EnableSwaggerChangeLog();
                     c.EnableSwaggerProxyGen();
                     c.EnableSwaggerPostmanJsonGen();
                     c.EnableSwaggerSearch();
+
                   
+
                 })
                 .EnableSwaggerUi(c => {
 
                     //lang file
-                    // c.InjectJavaScript(typeof(AbpWebApiSwaggerToolModule).Assembly, "Abp.Web.Api.SwaggerTool.lang.translator.js");
-                    //c.InjectJavaScript(typeof(AbpWebApiSwaggerToolModule).Assembly, "Abp.Web.Api.SwaggerTool.lang.zh-CN.js");
-
+                  
+                    c.InjectJavaScript(typeof(AbpWebApiSwaggerToolModule).Assembly, "Abp.Web.Api.SwaggerTool.lang.translator.js");
+                    var culture = Thread.CurrentThread.CurrentCulture.Name;
+                    Logger.Info("use swagger-ui lang file:" + culture);
+                   c.InjectJavaScript(typeof(AbpWebApiSwaggerToolModule).Assembly, "Abp.Web.Api.SwaggerTool.lang."+ culture + ".js");
+                 
 
                     //theme
                     if (!string.IsNullOrEmpty(setting.theme))
                     {
+                        Logger.Info("use swagger-ui theme"+setting.theme);
                         c.InjectStylesheet(typeof(AbpWebApiSwaggerToolModule).Assembly, "Abp.Web.Api.SwaggerTool.Theme.theme-"+setting.theme+".css");
                     }
                     //customassert
                     if (setting.CustomAssets!=null)
                     {
+                        Logger.Info("set swagger-ui custom asset");
                         foreach (var item in setting.CustomAssets)
                         {
                             c.CustomAsset(item.name, Assembly.Load(item.assambly), item.resourcename);
+                            Logger.Info(" swagger-ui custom asset:"+item.resourcename);
                         }
                     }
                     

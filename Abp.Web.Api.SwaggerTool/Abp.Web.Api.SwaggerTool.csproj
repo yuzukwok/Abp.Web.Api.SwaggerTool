@@ -215,6 +215,7 @@
     <Compile Include="Schema4Json.cs" />
     <Compile Include="SwaggerChangeLogHandler.cs" />
     <Compile Include="SwaggerDiff.cs" />
+    <Compile Include="SwaggerManger\CachingSwaggerProvider.cs" />
     <Compile Include="SwaggerManger\ISwaggerStore.cs" />
     <Compile Include="SwaggerManger\TextSwaggerStore.cs" />
     <Compile Include="Search\SwaggerSearchHandler.cs" />

@@ -16,9 +16,7 @@ namespace Abp.Web.Api.SwaggerTool.SampleSite
     {
         protected override void Application_Start(object sender, EventArgs e)
         {
-           
-
-            base.Application_Start(sender, e);
+           base.Application_Start(sender, e);
         }
     }
 }

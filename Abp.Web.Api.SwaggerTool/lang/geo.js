@@ -54,3 +54,8 @@ window.SwaggerTranslator.learn({
     "from path":"მისამართიდან",
     "server returned":"სერვერმა დააბრუნა"
 });
+
+
+$(function () {
+    window.SwaggerTranslator.translate();
+});

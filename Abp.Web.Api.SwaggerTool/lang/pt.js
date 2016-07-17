@@ -51,3 +51,8 @@ window.SwaggerTranslator.learn({
     "from path":"do caminho",
     "server returned":"servidor retornou"
 });
+
+
+$(function () {
+    window.SwaggerTranslator.translate();
+});

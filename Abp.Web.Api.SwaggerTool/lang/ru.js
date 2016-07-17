@@ -54,3 +54,8 @@ window.SwaggerTranslator.learn({
     "from path":"по адресу",
     "server returned":"сервер сказал"
 });
+
+
+$(function () {
+    window.SwaggerTranslator.translate();
+});
