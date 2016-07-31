@@ -55,8 +55,8 @@ namespace Abp.Web.Api.SwaggerTool
                 {
                     SwaggerDiff diff = new SwaggerDiff();
                    var re= diff.Diff(info.SwaggerDoc, last.SwaggerDoc);
-                    info.BackwardsCompatible = re.Item2;
-                    info.ChangeLogs = re.Item1;
+                    //info.BackwardsCompatible = re.Item2;
+                    info.ChangeLogs = FormatChangelogDesc(re);
                 }
 
                 _swaggerstore.ImportNewVersion(info);              
@@ -70,8 +70,20 @@ namespace Abp.Web.Api.SwaggerTool
             }
         }
 
-      
-        
+        private string FormatChangelogDesc(SwaggerDiffResult re)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (var item in re.AddMethods)
+            {
+                builder.AppendLine(item);
+            }
+            foreach (var item in re.MissMethods)
+            {
+                builder.AppendLine(item);
+            }
+            return builder.ToString();
+        }
+
         private Task<HttpResponseMessage> TaskFor(HttpResponseMessage response)
         {
             var tsc = new TaskCompletionSource<HttpResponseMessage>();

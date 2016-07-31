@@ -1,0 +1,1 @@
+ nuget.exe  pack ..\Abp.Web.Api.SwaggerTool\Abp.Web.Api.SwaggerTool.csproj -Prop Configuration=Release -Symbols

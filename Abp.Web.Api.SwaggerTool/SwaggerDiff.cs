@@ -1,20 +1,12 @@
-﻿using Difftaculous;
-using Difftaculous.Adapters;
-using Difftaculous.Paths;
-using Difftaculous.Results;
-using System;
+﻿using NSwag;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Abp.Web.Api.SwaggerTool
 {
-   public class SwaggerDiff
+    public class SwaggerDiff
     {
-        Regex regexpathparameterreq = new Regex(@"paths\.\['[/\w]*'\]\.[\w]*\.parameters\[\d+\]\.required");
-        public Tuple<string,bool> Diff(string newdoc, string olddoc)
+        
+        public SwaggerDiffResult Diff(string newdoc, string olddoc)
         {
             //兼容性
             //            all path and verb combinations in the old specification are present in the new one
@@ -25,43 +17,35 @@ namespace Abp.Web.Api.SwaggerTool
             //all response attributes in the old specification have the same type in the new one
             SwaggerDiffResult re = new SwaggerDiffResult();
             bool compatiable = true;
-            IDiffResult result = DiffEngine.Compare(new JsonAdapter(newdoc),
-                                                    new JsonAdapter(olddoc));
 
-            StringBuilder builder = new StringBuilder();
+            var snew = SwaggerService.FromJson(newdoc);
+            var sold=SwaggerService.FromJson(olddoc);
 
-            foreach (var item in result.Annotations)
-            {
-                if (item is MissingPropertyAnnotation)
-                {
-                    if (item.Path.AsJsonPath == "paths")
-                    {
-                        //缺少方法
-                        compatiable = false;
-                        re.MissMethods.Add("del path：" + ((MissingPropertyAnnotation)item).PropertyName);
-                        continue;
-                    }
-                }
-                else if (item is DifferingValuesAnnotation)
-                {
-                    //字段变化
-                    //path 中parameter required字段的变化 F->T 非兼容
-                    var diffv = item as DifferingValuesAnnotation;
-                    if (regexpathparameterreq.Match(diffv.Path.AsJsonPath).Success)
-                    {
-                        if (Convert.ToBoolean(diffv.ValueA)==true&&Convert.ToBoolean(diffv.ValueB)==false)
-                        {
-                            compatiable = false;
-                            
-                        }
-                        re.FieldChanges.Add("field required change:"+diffv.Message);
-                    }
-                    
-                }
-                builder.Append(item.Path + " " + item.Message);
-            }
+            //StringBuilder builder = new StringBuilder();
 
-            return Tuple.Create<string,bool>(builder.ToString(),true);
+            //foreach (var item in result.Annotations)
+            //{
+            //    if (item is MissingPropertyAnnotation)
+            //    {
+            //        if (item.Path.AsJsonPath == "paths")
+            //        {
+            //            //缺少方法
+            //            compatiable = false;
+            //            re.MissMethods.Add("del path：" + ((MissingPropertyAnnotation)item).PropertyName);
+            //            continue;
+            //        }
+            //        else if (regexpathmethod.Match(item.Path.AsJsonPath).Success)
+            //        {
+            //            re.MissMethods.Add("del path:"+ regexpathmethod.Match(item.Path.AsJsonPath).Value.Replace("paths.","") + " http method:" + ((MissingPropertyAnnotation)item).PropertyName);
+            //            continue;
+            //        }
+            //    }
+
+            //   // builder.Append(item.Path + " " + item.Message);
+            //}
+
+
+            return re;
 
         }
 
@@ -75,10 +59,12 @@ namespace Abp.Web.Api.SwaggerTool
     {
         public SwaggerDiffResult()
         {
+            AddMethods = new List<string>();
             MissMethods = new List<string>();
             FieldChanges = new List<string>();
         }
         public List<string> MissMethods { get; set; }
+        public List<string> AddMethods { get; set; }
         public List<string> FieldChanges { get; set;  }
     }
 }

@@ -18,6 +18,11 @@ namespace Abp.Web.Api.SwaggerTool.SampleSite.Controllers
             return new string[] { "value1", "value2" };
         }
 
+
+        //public string Api1()
+        //{
+        //    return "api1";
+        //}
         // GET api/values/5
         public string Get(int id)
         {

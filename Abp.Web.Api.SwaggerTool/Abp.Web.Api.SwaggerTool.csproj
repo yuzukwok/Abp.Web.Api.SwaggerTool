@@ -30,20 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.0.10.0.0\lib\net452\Abp.dll</HintPath>
+    <Reference Include="Abp, Version=0.10.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.0.10.3.0\lib\net452\Abp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.0.10.0.0\lib\net452\Abp.Web.dll</HintPath>
+    <Reference Include="Abp.Web, Version=0.10.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.0.10.3.0\lib\net452\Abp.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web.Api, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.Api.0.10.0.0\lib\net452\Abp.Web.Api.dll</HintPath>
+    <Reference Include="Abp.Web.Api, Version=0.10.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.Api.0.10.3.0\lib\net452\Abp.Web.Api.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web.Common, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.Common.0.10.0.0\lib\net452\Abp.Web.Common.dll</HintPath>
+    <Reference Include="Abp.Web.Common, Version=0.10.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.Common.0.10.3.0\lib\net452\Abp.Web.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -82,20 +82,20 @@
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NJsonSchema, Version=2.59.6040.32732, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
-      <HintPath>..\packages\NJsonSchema.2.59.6040.32732\lib\portable45-net45+win8+wp8+wpa81\NJsonSchema.dll</HintPath>
+    <Reference Include="NJsonSchema, Version=2.65.6055.39156, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\packages\NJsonSchema.2.65.6055.39156\lib\portable45-net45+win8+wp8+wpa81\NJsonSchema.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NJsonSchema.CodeGeneration, Version=2.59.6040.32733, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
-      <HintPath>..\packages\NJsonSchema.CodeGeneration.2.59.6040.32733\lib\portable45-net45+win8+wp8+wpa81\NJsonSchema.CodeGeneration.dll</HintPath>
+    <Reference Include="NJsonSchema.CodeGeneration, Version=2.65.6055.39156, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\packages\NJsonSchema.CodeGeneration.2.65.6055.39156\lib\portable45-net45+win8+wp8+wpa81\NJsonSchema.CodeGeneration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NSwag.CodeGeneration, Version=3.26.6040.40945, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NSwag.CodeGeneration.3.26.6040.40945\lib\portable45-net45+win8+wp8+wpa81\NSwag.CodeGeneration.dll</HintPath>
+    <Reference Include="NSwag.CodeGeneration, Version=3.30.6051.40426, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSwag.CodeGeneration.3.30.6051.40426\lib\portable45-net45+win8+wp8+wpa81\NSwag.CodeGeneration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NSwag.Core, Version=3.26.6040.40944, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
-      <HintPath>..\packages\NSwag.Core.3.26.6040.40944\lib\portable45-net45+win8+wp8+wpa81\NSwag.Core.dll</HintPath>
+    <Reference Include="NSwag.Core, Version=3.30.6051.40425, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSwag.Core.3.30.6051.40425\lib\portable45-net45+win8+wp8+wpa81\NSwag.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
@@ -145,66 +145,6 @@
     <Compile Include="CodeGeneration\GenCode.cs" />
     <Compile Include="CodeGeneration\TypeScriptGen.cs" />
     <Compile Include="DateTimeExtensions.cs" />
-    <Compile Include="Difftaculous\Adapters\AbstractAdapter.cs" />
-    <Compile Include="Difftaculous\Adapters\JsonAdapter.cs" />
-    <Compile Include="Difftaculous\Adapters\ObjectAdapter.cs" />
-    <Compile Include="Difftaculous\Adapters\XmlAdapter.cs" />
-    <Compile Include="Difftaculous\ArrayDiff\DiffArraySubsequencer.cs" />
-    <Compile Include="Difftaculous\ArrayDiff\ElementGroup.cs" />
-    <Compile Include="Difftaculous\ArrayDiff\ElementGroupPostProcessor.cs" />
-    <Compile Include="Difftaculous\ArrayDiff\IArraySubsequencer.cs" />
-    <Compile Include="Difftaculous\ArrayDiff\IndexedArraySubsequencer.cs" />
-    <Compile Include="Difftaculous\ArrayDiff\KeyedArraySubsequencer.cs" />
-    <Compile Include="Difftaculous\Caveats\ICaveat.cs" />
-    <Compile Include="Difftaculous\Caveats\VarianceCaveat.cs" />
-    <Compile Include="Difftaculous\DiffEngine.cs" />
-    <Compile Include="Difftaculous\DiffSettings.cs" />
-    <Compile Include="Difftaculous\Hints\ArrayDiffHint.cs" />
-    <Compile Include="Difftaculous\Hints\IHint.cs" />
-    <Compile Include="Difftaculous\Misc\Extensions.cs" />
-    <Compile Include="Difftaculous\Paths\ArrayIndexFilter.cs" />
-    <Compile Include="Difftaculous\Paths\ArrayMultipleIndexFilter.cs" />
-    <Compile Include="Difftaculous\Paths\ArraySliceFilter.cs" />
-    <Compile Include="Difftaculous\Paths\DiffPath.cs" />
-    <Compile Include="Difftaculous\Paths\Expressions\BooleanQueryExpression.cs" />
-    <Compile Include="Difftaculous\Paths\Expressions\CompositeExpression.cs" />
-    <Compile Include="Difftaculous\Paths\Expressions\QueryExpression.cs" />
-    <Compile Include="Difftaculous\Paths\FieldFilter.cs" />
-    <Compile Include="Difftaculous\Paths\FieldMultipleFilter.cs" />
-    <Compile Include="Difftaculous\Paths\JsonPathParser.cs" />
-    <Compile Include="Difftaculous\Paths\PathException.cs" />
-    <Compile Include="Difftaculous\Paths\PathFilter.cs" />
-    <Compile Include="Difftaculous\Paths\QueryFilter.cs" />
-    <Compile Include="Difftaculous\Paths\ScanFilter.cs" />
-    <Compile Include="Difftaculous\Results\AbstractDiffAnnotation.cs" />
-    <Compile Include="Difftaculous\Results\ArrayItemsDeletedAnnotation.cs" />
-    <Compile Include="Difftaculous\Results\ArrayItemsInsertedAnnotation.cs" />
-    <Compile Include="Difftaculous\Results\ArrayItemsReplacedAnnotation.cs" />
-    <Compile Include="Difftaculous\Results\DifferingValuesAnnotation.cs" />
-    <Compile Include="Difftaculous\Results\DiffResult.cs" />
-    <Compile Include="Difftaculous\Results\IDiffResult.cs" />
-    <Compile Include="Difftaculous\Results\InconsistentTypesAnnotation.cs" />
-    <Compile Include="Difftaculous\Results\MissingKeyAnnotation.cs" />
-    <Compile Include="Difftaculous\Results\MissingPropertyAnnotation.cs" />
-    <Compile Include="Difftaculous\ZModel\CollectionUtils.cs" />
-    <Compile Include="Difftaculous\ZModel\ConvertUtils.cs" />
-    <Compile Include="Difftaculous\ZModel\Extensions.cs" />
-    <Compile Include="Difftaculous\ZModel\MathUtils.cs" />
-    <Compile Include="Difftaculous\ZModel\MiscellaneousUtils.cs" />
-    <Compile Include="Difftaculous\ZModel\ReflectionUtils.cs" />
-    <Compile Include="Difftaculous\ZModel\TokenType.cs" />
-    <Compile Include="Difftaculous\ZModel\TypeExtensions.cs" />
-    <Compile Include="Difftaculous\ZModel\ValidationUtils.cs" />
-    <Compile Include="Difftaculous\ZModel\WriteExtensions.cs" />
-    <Compile Include="Difftaculous\ZModel\ZArray.cs" />
-    <Compile Include="Difftaculous\ZModel\ZContainer.cs" />
-    <Compile Include="Difftaculous\ZModel\ZEnumerable.cs" />
-    <Compile Include="Difftaculous\ZModel\ZException.cs" />
-    <Compile Include="Difftaculous\ZModel\ZObject.cs" />
-    <Compile Include="Difftaculous\ZModel\ZProperty.cs" />
-    <Compile Include="Difftaculous\ZModel\ZPropertyKeyedCollection.cs" />
-    <Compile Include="Difftaculous\ZModel\ZToken.cs" />
-    <Compile Include="Difftaculous\ZModel\ZValue.cs" />
     <Compile Include="Postman\PostManData.cs" />
     <Compile Include="Postman\PostManGen.cs" />
     <Compile Include="Config\SwaggerToolSettings.cs" />

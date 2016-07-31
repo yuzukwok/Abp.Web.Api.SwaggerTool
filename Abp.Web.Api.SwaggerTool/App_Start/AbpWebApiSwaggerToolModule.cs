@@ -1,5 +1,6 @@
 ﻿using Abp.Configuration.Startup;
 using Abp.Modules;
+using Abp.Web.Api.SwaggerTool;
 using Abp.Web.Api.SwaggerTool.Config;
 using Abp.Web.Api.SwaggerTool.Logging;
 using Abp.Web.Api.SwaggerTool.SwaggerManager;
@@ -16,7 +17,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Abp.Web.Api.SwaggerTool
+namespace Abp.Web.Api
 {
     [DependsOn(typeof(AbpWebApiModule))]
    public class AbpWebApiSwaggerToolModule:AbpModule
@@ -84,7 +85,7 @@ namespace Abp.Web.Api.SwaggerTool
                     c.DocumentFilter<ApplyDocumentVendorExtensions>();
 
 
-                    c.CustomProvider((defaultProvider) => new CachingSwaggerProvider(defaultProvider));
+                   // c.CustomProvider((defaultProvider) => new CachingSwaggerProvider(defaultProvider));
 
                     //userful!!!
                     c.EnableSwaggerChangeLog();
