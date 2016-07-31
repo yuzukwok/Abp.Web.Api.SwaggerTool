@@ -1,0 +1,18 @@
+﻿{
+  "enable": true, //是否启用swagger集成
+  "theme": "flattop", //主题名称 flattop，muted，newspaper，outline，monokai，feeling-blue
+  "CSharpGen": {
+    "ClassName": "ApiClient", //C#代理生成的类名
+    "Namespace": "ApiServices" //C#代理生成的命名空间
+  },
+  "TypeScriptGen": {
+    "ClassName": "Client", //JS代理生成的类名
+    "Namespace": "ApiServices" //JS代理生成的命名空间
+  },
+  "PostmanGen": {
+    "name": "ApiServices" //名称
+  },
+  "XmlCommentFiles": ["xxx.xml"]//xml注释的文件名
+
+
+}
