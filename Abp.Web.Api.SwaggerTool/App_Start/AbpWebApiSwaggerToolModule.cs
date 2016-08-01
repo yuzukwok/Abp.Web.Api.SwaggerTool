@@ -2,6 +2,7 @@
 using Abp.Modules;
 using Abp.Web.Api.SwaggerTool;
 using Abp.Web.Api.SwaggerTool.Config;
+using Abp.Web.Api.SwaggerTool.Filter;
 using Abp.Web.Api.SwaggerTool.Logging;
 using Abp.Web.Api.SwaggerTool.SwaggerManager;
 using Abp.Web.Api.SwaggerTool.SwaggerManger;
@@ -83,7 +84,8 @@ namespace Abp.Web.Api
 
 
                     c.DocumentFilter<ApplyDocumentVendorExtensions>();
-
+                    c.DocumentFilter<HideDocsFilter>();
+                   
 
                    // c.CustomProvider((defaultProvider) => new CachingSwaggerProvider(defaultProvider));
 

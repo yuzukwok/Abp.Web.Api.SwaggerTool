@@ -12,6 +12,7 @@ namespace Abp.Web.Api.SwaggerTool.SampleSite.Controllers
     [Authorize]
     public class ValuesController : ApiController
     {
+        [DisplayName("A")]
         // GET api/values
         public IEnumerable<string> Get()
         {

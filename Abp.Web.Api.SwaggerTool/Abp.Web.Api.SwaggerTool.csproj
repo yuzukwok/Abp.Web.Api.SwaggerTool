@@ -145,6 +145,7 @@
     <Compile Include="CodeGeneration\GenCode.cs" />
     <Compile Include="CodeGeneration\TypeScriptGen.cs" />
     <Compile Include="DateTimeExtensions.cs" />
+    <Compile Include="Filter\HideInDocsFilter.cs" />
     <Compile Include="Postman\PostManData.cs" />
     <Compile Include="Postman\PostManGen.cs" />
     <Compile Include="Config\SwaggerToolSettings.cs" />
