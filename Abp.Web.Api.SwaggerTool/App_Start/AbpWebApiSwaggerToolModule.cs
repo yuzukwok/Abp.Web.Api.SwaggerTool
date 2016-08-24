@@ -82,6 +82,11 @@ namespace Abp.Web.Api
 
                     }
 
+                    if (setting.UseFullTypeNameInSchemaIds)
+                    {
+                        c.UseFullTypeNameInSchemaIds();
+                    }
+                    
 
                     c.DocumentFilter<ApplyDocumentVendorExtensions>();
                     c.DocumentFilter<HideDocsFilter>();
