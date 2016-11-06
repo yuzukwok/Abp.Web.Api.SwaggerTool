@@ -24,6 +24,16 @@ namespace Abp.Web.Api.SwaggerTool
                 {
                     swaggerDoc.tags.Add(new Tag() { name = item.ControllerName, description = desc[0].DisplayName });
                 }
+                else
+                {
+                    var desc2 = item.GetCustomAttributes<DescriptionAttribute>();
+                    if (desc2 != null && desc2.Count > 0)
+                    {
+                        swaggerDoc.tags.Add(new Tag() { name = item.ControllerName, description = desc2[0].Description });
+                    }
+                }
+
+                
             }
 
 
