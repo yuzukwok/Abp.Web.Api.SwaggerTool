@@ -64,7 +64,7 @@ namespace Abp.Web.Api.SwaggerTool
                             var desc =(DisplayAttribute) enumOption.GetType().GetField(enumOption.ToString()).GetCustomAttributes(true).Where(p => p is DisplayAttribute).FirstOrDefault();
                             if (desc==null)
                             {
-                                enumDescriptions.Add(string.Format("{0} = {1} ", (int)enumOption, Enum.GetName(enumOption.GetType(), enumOption)));
+                                enumDescriptions.Add(string.Format("{0} = {1} ", Convert.ToInt32(enumOption), Enum.GetName(enumOption.GetType(), enumOption)));
                             }
                             else
                             {
