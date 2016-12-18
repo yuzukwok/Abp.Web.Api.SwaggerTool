@@ -11,7 +11,7 @@ namespace Abp.Web.Api.SwaggerTool.CodeGeneration
 {
    public class GenCode
     {
-        public string Gen(string type, SwaggerService service, SwaggerToolSettings setting)
+        public string Gen(string type, SwaggerDocument service, SwaggerToolSettings setting)
         {
             switch (type)
             {

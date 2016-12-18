@@ -11,7 +11,7 @@ namespace Abp.Web.Api.SwaggerTool.CodeGeneration
 {
     public class TypeScriptGen
     {
-        public string Gen(SwaggerService service, SwaggerToolSettings setting, TypeScriptTemplate Template)
+        public string Gen(SwaggerDocument service, SwaggerToolSettings setting, TypeScriptTemplate Template)
         {
             var settings = new SwaggerToTypeScriptClientGeneratorSettings
             {

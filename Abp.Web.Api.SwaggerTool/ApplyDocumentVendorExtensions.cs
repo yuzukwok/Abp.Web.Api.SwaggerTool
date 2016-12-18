@@ -12,6 +12,15 @@ namespace Abp.Web.Api.SwaggerTool
 {
     public class ApplyDocumentVendorExtensions : IDocumentFilter
     {
+        private string hackcontrollername(string name) {
+            if (name.Contains('/'))
+            {
+                return name.Replace("/", "_");
+            }
+            else {
+                return name;
+            }
+        }
         public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
         {
             //添加Tag
@@ -22,14 +31,15 @@ namespace Abp.Web.Api.SwaggerTool
                 var desc = item.GetCustomAttributes<DisplayNameAttribute>();
                 if (desc != null && desc.Count > 0)
                 {
-                    swaggerDoc.tags.Add(new Tag() { name = item.ControllerName, description = desc[0].DisplayName });
+                    //hack
+                    swaggerDoc.tags.Add(new Tag() { name = hackcontrollername(item.ControllerName), description = desc[0].DisplayName });
                 }
                 else
                 {
                     var desc2 = item.GetCustomAttributes<DescriptionAttribute>();
                     if (desc2 != null && desc2.Count > 0)
                     {
-                        swaggerDoc.tags.Add(new Tag() { name = item.ControllerName, description = desc2[0].Description });
+                        swaggerDoc.tags.Add(new Tag() { name = hackcontrollername(item.ControllerName), description = desc2[0].Description });
                     }
                 }
 

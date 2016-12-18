@@ -57,9 +57,20 @@ namespace Abp.Web.Api
             Configuration.Modules.AbpWebApi().HttpConfiguration
                 .EnableSwagger(c =>
                 {
-                    
+
+
                     c.SingleApiVersion(setting.version, setting.title);
                     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+
+                    //对于abp 动态api中api描述目前带有/,会生成到swagger里tags标签，swagger-ui自动url编码，导致界面上出错
+                  c.GroupActionsBy(apidesc => {
+                   var name = apidesc.ActionDescriptor.ControllerDescriptor.ControllerName;
+                   if (name.Contains("/")) { 
+                        return name.Replace("/", "_");
+                    }else{
+                        return name;
+                    }
+                   });
                     if (setting.XmlCommentFiles != null)
                     {
                         Logger.Info("using xmlcommentfiles");

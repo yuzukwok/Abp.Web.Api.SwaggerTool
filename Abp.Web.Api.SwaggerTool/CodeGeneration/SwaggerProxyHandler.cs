@@ -1,19 +1,13 @@
 ﻿using Abp.Web.Api.SwaggerTool.Config;
 using Newtonsoft.Json;
-using NSwag;
-using NSwag.CodeGeneration.CodeGenerators.CSharp;
 using Swashbuckle.Application;
 using Swashbuckle.Swagger;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Abp.Web.Api.SwaggerTool
 {
@@ -37,7 +31,7 @@ namespace Abp.Web.Api.SwaggerTool
             {
                 var swaggerDoc = swaggerProvider.GetSwagger(rootUrl, setting.version);
                 var str = JsonConvert.SerializeObject(swaggerDoc, Formatting.Indented, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore,Converters = new[] { new VendorExtensionsConverter() } });
-                var service = SwaggerService.FromJson(str);
+                var service = NSwag.SwaggerDocument.FromJson(str);
 
                 var code = new CodeGeneration.GenCode().Gen(type, service, setting);
                 // var content = ContentFor(request, swaggerDoc);
@@ -49,13 +43,13 @@ namespace Abp.Web.Api.SwaggerTool
             }
         }
 
-        private HttpContent ContentFor(HttpRequestMessage request, SwaggerDocument swaggerDoc)
-        {
-            var negotiator = request.GetConfiguration().Services.GetContentNegotiator();
-            var result = negotiator.Negotiate(typeof(SwaggerDocument), request, GetSupportedSwaggerFormatters());
+        //private HttpContent ContentFor(HttpRequestMessage request, SwaggerDocument swaggerDoc)
+        //{
+        //    var negotiator = request.GetConfiguration().Services.GetContentNegotiator();
+        //    var result = negotiator.Negotiate(typeof(SwaggerDocument), request, GetSupportedSwaggerFormatters());
 
-            return new ObjectContent(typeof(SwaggerDocument), swaggerDoc, result.Formatter, result.MediaType);
-        }
+        //    return new ObjectContent(typeof(SwaggerDocument), swaggerDoc, result.Formatter, result.MediaType);
+        //}
 
         private IEnumerable<MediaTypeFormatter> GetSupportedSwaggerFormatters()
         {

@@ -11,7 +11,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
 {
   public  class PostManGen
     {
-        public string Gen(SwaggerService service,string root,SwaggerToolSettings setting)
+        public string Gen(SwaggerDocument service,string root,SwaggerToolSettings setting)
         {
             var collectionId = PostMan.GetId();
             var apis = service.Operations;

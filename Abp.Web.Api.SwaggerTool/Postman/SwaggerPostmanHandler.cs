@@ -36,7 +36,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
             {
                 var swaggerDoc = swaggerProvider.GetSwagger(rootUrl, setting.version);
                 var str = JsonConvert.SerializeObject(swaggerDoc, Formatting.Indented, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, Converters = new[] { new VendorExtensionsConverter() } });
-                var service = SwaggerService.FromJson(str);
+                var service = NSwag.SwaggerDocument.FromJson(str);
 
                 var code = new PostManGen().Gen( service, rootUrl, setting);
                 var req = new HttpResponseMessage { Content = new StringContent(code) };

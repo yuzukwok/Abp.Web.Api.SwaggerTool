@@ -18,8 +18,8 @@ namespace Abp.Web.Api.SwaggerTool
             SwaggerDiffResult re = new SwaggerDiffResult();
             bool compatiable = true;
 
-            var snew = SwaggerService.FromJson(newdoc);
-            var sold=SwaggerService.FromJson(olddoc);
+            var snew = NSwag.SwaggerDocument.FromJson(newdoc);
+            var sold= NSwag.SwaggerDocument.FromJson(olddoc);
 
             //StringBuilder builder = new StringBuilder();
 

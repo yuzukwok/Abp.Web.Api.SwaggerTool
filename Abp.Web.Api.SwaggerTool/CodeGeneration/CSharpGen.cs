@@ -12,7 +12,7 @@ namespace Abp.Web.Api.SwaggerTool.CodeGeneration
   public  class CSharpGen
     {
 
-        public string Gen(SwaggerService service, SwaggerToolSettings setting)
+        public string Gen(SwaggerDocument service, SwaggerToolSettings setting)
         {
             var settings = new SwaggerToCSharpClientGeneratorSettings
             {

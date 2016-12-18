@@ -1,4 +1,5 @@
-﻿using Abp.Modules;
+﻿using Abp.Configuration.Startup;
+using Abp.Modules;
 using Abp.Web.Api.SwaggerTool.SampleSite.Service;
 using Abp.WebApi.Controllers.Dynamic.Builders;
 using System;
@@ -27,7 +28,7 @@ namespace Abp.Web.Api.SwaggerTool.SampleSite.App_Start
 
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
 
-            DynamicApiControllerBuilder.For<ISampleAppService>("app/sample").Build();
+            Configuration.Modules.AbpWebApi().DynamicApiControllerBuilder.For<ISampleAppService>("app/sample").Build();
             base.Initialize();
 
         }
