@@ -68,7 +68,7 @@ namespace Abp.Web.Api.SwaggerTool
                             }
                             else
                             {
-                                enumDescriptions.Add(string.Format("{0} = {1} ", (int)enumOption, desc.Name));
+                                enumDescriptions.Add(string.Format("{0} = {1} ", Convert.ToInt32(enumOption), desc.Name));
                             }
                             
                         }
