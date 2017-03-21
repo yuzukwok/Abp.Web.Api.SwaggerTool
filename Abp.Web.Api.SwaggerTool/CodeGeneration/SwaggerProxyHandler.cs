@@ -18,28 +18,40 @@ namespace Abp.Web.Api.SwaggerTool
         {
             _config = config;
         }
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            CancellationToken cancellationToken) {
             var setting = Its.Configuration.Settings.Get<SwaggerToolSettings>();
             //using refletions to internal
-            var swaggerProvider= (ISwaggerProvider) _config.GetType().GetMethod("GetSwaggerProvider", System.Reflection.BindingFlags.Instance| System.Reflection.BindingFlags.NonPublic).Invoke(_config,new object[] { request });
-          
-            var rootUrl = (string)_config.GetType().GetMethod("GetRootUrl", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(_config, new object[] { request });
+            var swaggerProvider =
+                (ISwaggerProvider)
+                _config.GetType()
+                    .GetMethod("GetSwaggerProvider",
+                        System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                    .Invoke(_config, new object[] {request});
+
+            var rootUrl =
+                (string)
+                _config.GetType()
+                    .GetMethod("GetRootUrl",
+                        System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                    .Invoke(_config, new object[] {request});
             var type = request.GetRouteData().Values["type"].ToString();
 
-            try
-            {
+            try {
                 var swaggerDoc = swaggerProvider.GetSwagger(rootUrl, setting.version);
-                var str = JsonConvert.SerializeObject(swaggerDoc, Formatting.Indented, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore,Converters = new[] { new VendorExtensionsConverter() } });
-                var service = NSwag.SwaggerDocument.FromJson(str);
+                var str = JsonConvert.SerializeObject(swaggerDoc, Formatting.Indented,
+                    new JsonSerializerSettings() {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        Converters = new[] {new VendorExtensionsConverter()}
+                    });
+                var service = await NSwag.SwaggerDocument.FromJsonAsync(str);
 
                 var code = new CodeGeneration.GenCode().Gen(type, service, setting);
                 // var content = ContentFor(request, swaggerDoc);
-                return TaskFor(new HttpResponseMessage { Content = new StringContent(code) });
-            }
-            catch (UnknownApiVersion ex)
-            {
-                return TaskFor(request.CreateErrorResponse(HttpStatusCode.NotFound, ex));
+                return new HttpResponseMessage {Content = new StringContent(code)};
+            } catch(UnknownApiVersion ex) {
+                return request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
 

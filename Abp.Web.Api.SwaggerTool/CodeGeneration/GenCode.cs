@@ -1,11 +1,7 @@
 ﻿using Abp.Web.Api.SwaggerTool.Config;
 using NSwag;
-using NSwag.CodeGeneration.CodeGenerators.TypeScript;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NSwag.CodeGeneration.TypeScript;
 
 namespace Abp.Web.Api.SwaggerTool.CodeGeneration
 {

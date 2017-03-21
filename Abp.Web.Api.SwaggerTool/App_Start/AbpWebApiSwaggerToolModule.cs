@@ -3,19 +3,14 @@ using Abp.Modules;
 using Abp.Web.Api.SwaggerTool;
 using Abp.Web.Api.SwaggerTool.Config;
 using Abp.Web.Api.SwaggerTool.Filter;
-using Abp.Web.Api.SwaggerTool.Logging;
 using Abp.Web.Api.SwaggerTool.SwaggerManager;
 using Abp.Web.Api.SwaggerTool.SwaggerManger;
 using Abp.WebApi;
 using Swashbuckle.Application;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace Abp.Web.Api
@@ -23,15 +18,11 @@ namespace Abp.Web.Api
     [DependsOn(typeof(AbpWebApiModule))]
    public class AbpWebApiSwaggerToolModule:AbpModule
     {
-        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
-
         public override void PreInitialize()
         {
-            Logger.Info("AbpWebApiSwaggerToolModule PreInitialize");
             var setting = Its.Configuration.Settings.Get<SwaggerToolSettings>();
             if (setting.enable)
             {
-                Logger.Info("SwaggerUi IsEnable");
                 ConfigureSwaggerUi();
             }
            

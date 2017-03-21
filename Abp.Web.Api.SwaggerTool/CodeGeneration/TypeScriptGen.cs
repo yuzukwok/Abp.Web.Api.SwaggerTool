@@ -1,11 +1,6 @@
 ﻿using Abp.Web.Api.SwaggerTool.Config;
 using NSwag;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NSwag.CodeGeneration.CodeGenerators.TypeScript;
+using NSwag.CodeGeneration.TypeScript;
 
 namespace Abp.Web.Api.SwaggerTool.CodeGeneration
 {
@@ -18,7 +13,7 @@ namespace Abp.Web.Api.SwaggerTool.CodeGeneration
                 ClassName =setting.TypeScriptGen.ClassName,
                 Template = Template,
                 PromiseType=PromiseType.Promise,
-                TypeScriptGeneratorSettings=new NJsonSchema.CodeGeneration.TypeScript.TypeScriptGeneratorSettings() { ModuleName= setting.TypeScriptGen.ModuleName }
+                TypeScriptGeneratorSettings={ ModuleName= setting.TypeScriptGen.ModuleName }
             };
         
 

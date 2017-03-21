@@ -1,12 +1,13 @@
 ﻿using NSwag;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Abp.Web.Api.SwaggerTool
 {
     public class SwaggerDiff
     {
         
-        public SwaggerDiffResult Diff(string newdoc, string olddoc)
+        public async Task<SwaggerDiffResult> Diff(string newdoc, string olddoc)
         {
             //兼容性
             //            all path and verb combinations in the old specification are present in the new one
@@ -18,8 +19,8 @@ namespace Abp.Web.Api.SwaggerTool
             SwaggerDiffResult re = new SwaggerDiffResult();
             bool compatiable = true;
 
-            var snew = NSwag.SwaggerDocument.FromJson(newdoc);
-            var sold= NSwag.SwaggerDocument.FromJson(olddoc);
+            var snew = await SwaggerDocument.FromJsonAsync(newdoc);
+            var sold = await SwaggerDocument.FromJsonAsync(olddoc);
 
             //StringBuilder builder = new StringBuilder();
 

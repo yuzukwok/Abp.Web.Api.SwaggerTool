@@ -1,11 +1,7 @@
 ﻿using Abp.Web.Api.SwaggerTool.SwaggerManager;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Abp.Web.Api.SwaggerTool.SwaggerManger
 {
