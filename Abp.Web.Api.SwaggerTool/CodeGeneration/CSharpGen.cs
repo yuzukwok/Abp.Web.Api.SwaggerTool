@@ -1,25 +1,15 @@
 ﻿using Abp.Web.Api.SwaggerTool.Config;
 using NSwag;
-using NSwag.CodeGeneration.CodeGenerators.CSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NSwag.CodeGeneration.CSharp;
 
-namespace Abp.Web.Api.SwaggerTool.CodeGeneration
-{
-  public  class CSharpGen
-    {
+namespace Abp.Web.Api.SwaggerTool.CodeGeneration {
+    public class CSharpGen {
 
-        public string Gen(SwaggerDocument service, SwaggerToolSettings setting)
-        {
-            var settings = new SwaggerToCSharpClientGeneratorSettings
-            {
+        public string Gen(SwaggerDocument service, SwaggerToolSettings setting) {
+            var settings = new SwaggerToCSharpClientGeneratorSettings() {
                 ClassName = setting.CSharpGen.ClassName,
-                 CSharpGeneratorSettings=new NJsonSchema.CodeGeneration.CSharp.CSharpGeneratorSettings() {  Namespace= setting.CSharpGen.Namespace}
+                CSharpGeneratorSettings = {Namespace = setting.CSharpGen.Namespace}
             };
-
             var generator = new SwaggerToCSharpClientGenerator(service, settings);
             var code = generator.GenerateFile();
 

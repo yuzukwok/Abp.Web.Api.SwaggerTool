@@ -1,18 +1,13 @@
 ﻿using Abp.Web.Api.SwaggerTool.Config;
 using Newtonsoft.Json;
-using NSwag;
 using Swashbuckle.Application;
 using Swashbuckle.Swagger;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Abp.Web.Api.SwaggerTool.Postman
 {
@@ -23,7 +18,7 @@ namespace Abp.Web.Api.SwaggerTool.Postman
         {
             _config = config;
         }
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var setting = Its.Configuration.Settings.Get<SwaggerToolSettings>();
             //using refletions to internal
@@ -36,16 +31,15 @@ namespace Abp.Web.Api.SwaggerTool.Postman
             {
                 var swaggerDoc = swaggerProvider.GetSwagger(rootUrl, setting.version);
                 var str = JsonConvert.SerializeObject(swaggerDoc, Formatting.Indented, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, Converters = new[] { new VendorExtensionsConverter() } });
-                var service = NSwag.SwaggerDocument.FromJson(str);
+                var service = await NSwag.SwaggerDocument.FromJsonAsync(str);
 
                 var code = new PostManGen().Gen( service, rootUrl, setting);
                 var req = new HttpResponseMessage { Content = new StringContent(code) };
                 req.Content.Headers.Add("Content-Disposition", "attachment;filename=swagger2postman.json");
-                return TaskFor(req);
+                return req;
             }
-            catch (UnknownApiVersion ex)
-            {
-                return TaskFor(request.CreateErrorResponse(HttpStatusCode.NotFound, ex));
+            catch (UnknownApiVersion ex) {
+                return request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
 
